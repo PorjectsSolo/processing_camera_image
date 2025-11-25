@@ -37,16 +37,21 @@ android {
         targetSdkVersion 30
         // NDK 27.0.12077973+ required for 16KB page size support
         ndkVersion "27.0.12077973"
+        
+        // Set linker flags for 16KB page size support
+        externalNativeBuild {
+            cmake {
+                // These flags are passed to the linker
+                cppFlags "-Wl,-z,max-page-size=16384"
+                cFlags "-Wl,-z,max-page-size=16384"
+            }
+        }
     }
 
     externalNativeBuild{
         cmake{
             path "CMakeLists.txt"
             version "3.22.1"
-            // Add linker flags for 16KB page size support
-            arguments "-DCMAKE_C_FLAGS=-Wl,-z,max-page-size=16384",
-                     "-DCMAKE_CXX_FLAGS=-Wl,-z,max-page-size=16384",
-                     "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384"
         }
     }
 }
