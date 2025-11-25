@@ -43,6 +43,10 @@ android {
         cmake{
             path "CMakeLists.txt"
             version "3.22.1"
+            // Add linker flags for 16KB page size support
+            arguments "-DCMAKE_C_FLAGS=-Wl,-z,max-page-size=16384",
+                     "-DCMAKE_CXX_FLAGS=-Wl,-z,max-page-size=16384",
+                     "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384"
         }
     }
 }
