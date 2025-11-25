@@ -8,6 +8,7 @@ add_library( convertImage
 
 # Support for 16KB page size (required for Android 15+)
 # Set max page size to 16KB (16384 bytes) or 64KB (65536 bytes)
-target_link_options(convertImage PRIVATE
-    -Wl,-z,max-page-size=16384
+# Use set_target_properties for compatibility with older CMake versions
+set_target_properties(convertImage PROPERTIES
+    LINK_FLAGS "-Wl,-z,max-page-size=16384"
 )
