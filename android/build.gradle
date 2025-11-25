@@ -8,7 +8,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        // Updated AGP for better compatibility with 16KB page size support
+        classpath 'com.android.tools.build:gradle:7.4.0'
     }
 }
 
@@ -24,7 +25,7 @@ apply plugin: 'com.android.library'
 android {
     namespace "vn.thuanpm.processing_camera_image"
 
-    compileSdkVersion 33
+    compileSdkVersion 34
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -34,7 +35,8 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 30
-        ndkVersion "25.2.9519653"
+        // NDK 27.0.12077973+ required for 16KB page size support
+        ndkVersion "27.0.12077973"
     }
 
     externalNativeBuild{
